@@ -504,8 +504,6 @@ function levelCommission($referee, $amount, $commissionType, $trx)
 
         $tempReferee = $referer;
         $i++;
-
-        // dd('gatcha bitch!');
     }
     if (isset($transactions)) {
         Transaction::insert($transactions);
