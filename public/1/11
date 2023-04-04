@@ -1,0 +1,4 @@
+
+<h3 class="text-white">{{ showAmount($widget['referral_commissions']) }}
+                    {{ $general->cur_text }}</h3>
+refferal comition remove frpm dashboard.php
