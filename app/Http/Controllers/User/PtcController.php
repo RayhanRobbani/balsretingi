@@ -123,13 +123,13 @@ class PtcController extends Controller
         $ptc->decrement('remain');
         $ptc->save();
 
-        $user->balance += $ptc->amount;
+        $user->balance += ($ptc->amount * auth()->user()->plan['base_multiplier']);
         $user->save();
 
         $trx = getTrx();
         $transaction = new Transaction();
         $transaction->user_id = $user->id;
-        $transaction->amount = $ptc->amount;
+        $transaction->amount = ($ptc->amount * auth()->user()->plan['base_multiplier']);
         $transaction->post_balance = $user->balance;
         $transaction->charge = 0;
         $transaction->trx_type = '+';
@@ -141,11 +141,11 @@ class PtcController extends Controller
         $view               = new PtcView();
         $view->ptc_id       = $ptc->id;
         $view->user_id      = $user->id;
-        $view->amount       = $ptc->amount;
+        $view->amount       = ($ptc->amount * auth()->user()->plan['base_multiplier']);
         $view->view_date    = now();
         $view->save();
 
-        levelCommission($user, $ptc->amount, 'ptc_view_commission', $trx);
+        levelCommission($user, ($ptc->amount * auth()->user()->plan['base_multiplier']), 'ptc_view_commission', $trx);
 
         $notify[] = ['success','Successfully viewed this ads'];
         return redirect()->route('user.ptc.index')->withNotify($notify);

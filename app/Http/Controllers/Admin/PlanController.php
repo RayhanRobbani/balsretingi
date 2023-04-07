@@ -40,6 +40,7 @@ class PlanController extends Controller
         $plan->ref_level = $request->ref_level;
         $plan->validity = $request->validity;
         $plan->hierarchy_level = $request->hierarchy_level;
+        $plan->base_multiplier = $request->base_multiplier;
         $plan->status = isset($request->status) ? 1:0;
         $plan->save();
 

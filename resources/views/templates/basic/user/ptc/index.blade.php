@@ -14,7 +14,7 @@
                                     <span class="fs--14px mt-2">@lang('Ads duration') : {{ $ad->duration }}s</span>
                                 </div>
                                 <div class="col-4 text-end">
-                                    <h5 class="text--base">{{ $general->cur_sym }}{{ showAmount($ad->amount) }}</h5>
+                                    <h5 class="text--base">{{ $general->cur_sym }} {{ showAmount($ad->amount) * auth()->user()->plan['base_multiplier'] }}</h5>
                                     <a href="{{ route('user.ptc.show',encrypt($ad->id.'|'.auth()->user()->id)) }}" target="_blank" class="btn fs--12px px-sm-3 px-2 py-1 btn--base mt-2">@lang('View Ad')</a>
                                 </div>
                             </div>
